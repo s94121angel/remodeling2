@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{.Chart.Name }}-deployment2
+  name: {{.Chart.Name }}-remodeling-deployment2
 spec:
   replicas: {{ .Values.deployment.replicaCount }}
   selector:
