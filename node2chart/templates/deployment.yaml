@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Chart.Name }}-deployment2
+spec:
+  replicas: {{ .Values.deployment.replicaCount }}
+  selector:
+    matchLabels:
+      app: remodelingApp2
+  template:
+    metadata:
+      labels:
+        app: remodelingApp2
+    spec:
+      containers:
+      - name: remodeling-container2
+        image: s410071012/remodeling_platform2:{{ .Values.deployment.image.tag }}
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do python3 /home/jovyan/train-code/train.py;sleep 3000;done"]
+        ports:
+        - containerPort: 3700
+        imagePullPolicy: {{ .Values.deployment.pullPolicy }}
+        volumeMounts:
+        - name: test-volume
+          mountPath: /home/jovyan/my-model
+      volumes:
+      - name: test-volume
+        hostPath:
+          path: /downloads2
+          type: Directory

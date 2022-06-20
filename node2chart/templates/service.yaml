@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{.Chart.Name }}-deployment2
+spec:
+  type: NodePort
+  ports:
+  - port: 3701
+    targetPort: 3700
+  selector:
+    app: remodelingApp2
